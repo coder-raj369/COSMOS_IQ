@@ -1,0 +1,30 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%-- Shared Navigation Bar --%>
+<div class="grain-overlay"></div>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] rounded-full border border-white/10 bg-slate-950/60 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 flex justify-between items-center px-8 py-3 max-w-7xl mx-auto">
+    <div class="flex items-center gap-8">
+        <a class="text-2xl font-serif italic text-white hover:rotate-12 transition-transform duration-700" href="${pageContext.request.contextPath}/home">CosmosIQ</a>
+        <div class="hidden md:flex gap-6">
+            <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'home' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/home">Missions</a>
+            <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'apod' || currentPage == 'mars' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/apod">Telemetry</a>
+            <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'favorites' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/favorites">Archives</a>
+            <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'about' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/about">About</a>
+        </div>
+    </div>
+    <div class="flex items-center gap-4">
+        <c:if test="${not empty sessionScope.user}">
+            <c:if test="${sessionScope.user.admin}">
+                <a href="${pageContext.request.contextPath}/admin/dashboard" class="text-secondary hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">admin_panel_settings</span>
+                </a>
+            </c:if>
+            <a href="${pageContext.request.contextPath}/profile" class="text-slate-300 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">account_circle</span>
+            </a>
+            <a href="${pageContext.request.contextPath}/logout" class="bg-primary text-on-primary px-6 py-1.5 rounded-full font-label text-sm uppercase tracking-widest hover:shadow-[0_0_20px_rgba(109,221,255,0.4)] transition-all">Logout</a>
+        </c:if>
+        <c:if test="${empty sessionScope.user}">
+            <a href="${pageContext.request.contextPath}/login" class="bg-primary text-on-primary px-6 py-1.5 rounded-full font-label text-sm uppercase tracking-widest hover:shadow-[0_0_20px_rgba(109,221,255,0.4)] transition-all">Launch</a>
+        </c:if>
+    </div>
+</nav>

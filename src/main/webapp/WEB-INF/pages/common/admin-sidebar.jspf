@@ -1,0 +1,46 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%-- Admin Sidebar --%>
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-white/10 bg-slate-950/60 backdrop-blur-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col py-8 px-6 z-50">
+    <div class="mb-12">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
+                <span class="material-symbols-outlined text-on-primary text-xl">satellite_alt</span>
+            </div>
+            <div>
+                <h1 class="text-2xl font-headline font-black tracking-tighter text-primary">CosmosIQ</h1>
+                <p class="font-label tracking-widest text-[10px] uppercase text-on-surface/40">Orbital Command</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex-1 space-y-2">
+        <a class="flex items-center gap-4 py-3 px-4 ${adminPage == 'dashboard' ? 'text-primary font-bold border-r-2 border-primary' : 'text-on-surface/60 hover:text-on-surface hover:bg-white/5'} transition-all" href="${pageContext.request.contextPath}/admin/dashboard">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label tracking-wide text-xs uppercase">Overview</span>
+        </a>
+        <a class="flex items-center gap-4 py-3 px-4 ${adminPage == 'users' ? 'text-primary font-bold border-r-2 border-primary' : 'text-on-surface/60 hover:text-on-surface hover:bg-white/5'} transition-all" href="${pageContext.request.contextPath}/admin/users">
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-label tracking-wide text-xs uppercase">Users</span>
+        </a>
+        <a class="flex items-center gap-4 py-3 px-4 ${adminPage == 'events' ? 'text-primary font-bold border-r-2 border-primary' : 'text-on-surface/60 hover:text-on-surface hover:bg-white/5'} transition-all" href="${pageContext.request.contextPath}/admin/events">
+            <span class="material-symbols-outlined">event</span>
+            <span class="font-label tracking-wide text-xs uppercase">Events</span>
+        </a>
+        <a class="flex items-center gap-4 py-3 px-4 ${adminPage == 'messages' ? 'text-primary font-bold border-r-2 border-primary' : 'text-on-surface/60 hover:text-on-surface hover:bg-white/5'} transition-all" href="${pageContext.request.contextPath}/admin/messages">
+            <span class="material-symbols-outlined">chat</span>
+            <span class="font-label tracking-wide text-xs uppercase">Messages</span>
+        </a>
+    </div>
+    <div class="mt-auto space-y-4 pt-6 border-t border-white/5">
+        <a class="flex items-center gap-4 px-4 py-2 text-on-surface/60 hover:text-on-surface transition-colors" href="${pageContext.request.contextPath}/home">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span class="font-label tracking-wide text-xs uppercase">Back to Site</span>
+        </a>
+        <div class="flex items-center gap-3 px-2">
+            <span class="material-symbols-outlined text-primary">account_circle</span>
+            <div>
+                <p class="text-[11px] font-bold text-on-surface">${sessionScope.user.fullName}</p>
+                <p class="text-[9px] text-on-surface/50 uppercase tracking-widest font-label">${sessionScope.user.role}</p>
+            </div>
+        </div>
+    </div>
+</nav>

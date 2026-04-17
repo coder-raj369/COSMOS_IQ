@@ -1,0 +1,39 @@
+<%-- Shared Footer --%>
+<footer class="bg-surface-container-lowest py-20 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div>
+            <div class="font-headline text-3xl italic mb-6">CosmosIQ</div>
+            <p class="text-on-surface-variant text-sm leading-relaxed">The premier interface for celestial observation and planetary intelligence.</p>
+        </div>
+        <div>
+            <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-primary mb-6">Navigation</h4>
+            <ul class="space-y-4 text-sm text-on-surface-variant">
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/home">Dashboard</a></li>
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/apod">APOD Archive</a></li>
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/mars">Mars Rover</a></li>
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/asteroids">Asteroid Tracker</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-primary mb-6">Resources</h4>
+            <ul class="space-y-4 text-sm text-on-surface-variant">
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/about">About</a></li>
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/contact">Contact</a></li>
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/favorites">Favorites</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-primary mb-6">Status</h4>
+            <div class="bg-surface-container-high p-4 rounded-lg border border-white/5">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="font-label text-[10px] uppercase text-white">System Nominal</span>
+                </div>
+                <p class="text-[10px] text-on-surface-variant">NASA API and AI services online.</p>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 text-center">
+        <span class="font-label text-[8px] uppercase tracking-[0.5em] text-on-surface-variant opacity-30">&copy; 2026 CosmosIQ. CS5003NI Coursework. All Rights Reserved.</span>
+    </div>
+</footer>

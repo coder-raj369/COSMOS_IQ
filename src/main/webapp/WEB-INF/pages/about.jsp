@@ -27,7 +27,7 @@
 <!-- Why we exist -->
 <section class="py-32 px-6 md:px-24">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-        <img class="rounded-lg shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFRxmtCkfsuYWKudPMQ-fmD3bHE279PxV1mOJbAlj0LDdq0SpqX_jR1oJyucovFEwxAKgsRy1w66WOk-HXc8050bFhBx6E87zOQimzIkZhULCXJeMd1IBr425TgqZpee9y5jO-RQfRx2DjJKxe6v1_9LKhyri6b6nT76_Kix1bxKQGs0iLgcdl-FR2eG9Fj3_U0W1HttEq9fFd-A5NTUPGZhu2aiqo9idoCo7EIWPBvL0NjNZNnZ9F3GNeTthhfbLg6h_Yt1qeMQc" alt="Earth"/>
+        <img class="rounded-lg shadow-2xl" src="${pageContext.request.contextPath}/images/earth_PNG39.png" alt="Earth"/>
         <div>
             <h2 class="font-headline text-4xl md:text-5xl mb-8">Why we exist</h2>
             <p class="text-on-surface-variant text-lg leading-relaxed mb-12">For decades, humanity's greatest discoveries have remained locked behind technical barriers and complex datasets. We believe the wonders of the universe should be accessible to everyone. CosmosIQ bridges the gap between raw NASA data and intuitive interfaces.</p>

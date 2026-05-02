@@ -9,7 +9,6 @@ import java.io.IOException;
 
 /**
  * Blocks access to all URLs except public ones if user is not logged in.
- * Public URLs: /landing, /login, /register, /about, /contact, static resources.
  */
 @WebFilter("/*")
 public class AuthFilter implements Filter {

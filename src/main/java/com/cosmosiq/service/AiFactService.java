@@ -16,8 +16,6 @@ public class AiFactService {
 
     /**
      * Get an AI fact about the given topic. Checks cache first.
-     * @param topicKey unique key like "apod:2026-04-09" or "asteroid:99942"
-     * @param topicDescription human-readable topic for the prompt
      */
     public String getAIFact(String topicKey, String topicDescription) {
         // 1. Check cache

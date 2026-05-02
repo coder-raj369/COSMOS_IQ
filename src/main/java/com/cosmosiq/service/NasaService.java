@@ -9,13 +9,12 @@ import java.util.*;
 
 /**
  * Calls NASA free APIs and returns parsed data as Maps/Lists.
- * Uses Gson for JSON parsing. All methods return safe defaults on failure.
  */
 public class NasaService {
 
     private static final String BASE = "https://api.nasa.gov";
 
-    // ===== APOD (Astronomy Picture of the Day) =====
+    //  APOD (Astronomy Picture of the Day) 
 
     /** Get APOD for a specific date (format: "yyyy-MM-dd"). */
     public Map<String, String> getApod(String date) {
@@ -44,9 +43,9 @@ public class NasaService {
         return getApod(null);
     }
 
-    // ===== Mars Rover Photos =====
+    // Mars Rover Photos
 
-    /** Get Mars rover photos. rover: curiosity|perseverance|opportunity|spirit */
+    /** Get Mars rover photos. */
     public List<Map<String, String>> getMarsPhotos(String rover, String earthDate, String camera) {
         List<Map<String, String>> photos = new ArrayList<>();
         try {
@@ -86,7 +85,7 @@ public class NasaService {
         return photos;
     }
 
-    // ===== Near-Earth Objects (Asteroids) =====
+    // Near-Earth Objects (Asteroids)
 
     /** Get asteroids approaching Earth this week. */
     public List<Map<String, String>> getNearEarthObjects() {
@@ -142,7 +141,7 @@ public class NasaService {
         return asteroids;
     }
 
-    // ===== Helpers =====
+    //  Helpers 
 
     private String getStr(JsonObject obj, String key) {
         return obj.has(key) && !obj.get(key).isJsonNull() ? obj.get(key).getAsString() : "";

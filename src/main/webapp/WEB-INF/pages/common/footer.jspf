@@ -34,6 +34,6 @@
         </div>
     </div>
     <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 text-center">
-        <span class="font-label text-[8px] uppercase tracking-[0.5em] text-on-surface-variant opacity-30">&copy; 2026 CosmosIQ. CS5003NI Coursework. All Rights Reserved.</span>
+        <span class="font-label text-[8px] uppercase tracking-[0.5em] text-on-surface-variant opacity-30">&copy; 2026 CosmosIQ. All Rights Reserved.</span>
     </div>
 </footer>

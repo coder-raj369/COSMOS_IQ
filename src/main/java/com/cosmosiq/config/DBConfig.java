@@ -14,35 +14,26 @@ import java.sql.SQLException;
  */
 public class DBConfig {
 
-    // =================================================================
-    // EDIT THESE VALUES IF NEEDED
-    // =================================================================
+    
 
-    /** JDBC URL for MySQL. XAMPP default is localhost:3306. */
+    /** JDBC URL for MySQL. */
     public static final String DB_URL = "jdbc:mysql://localhost:3306/cosmosiq_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-
-    /** MySQL username. XAMPP default is "root". */
     public static final String DB_USER = "root";
-
-    /** MySQL password. XAMPP default is empty string "". */
     public static final String DB_PASSWORD = "";
 
-    // -----------------------------------------------------------------
+  
     // EXTERNAL API KEYS
-    // -----------------------------------------------------------------
 
-    /** NASA API key — get a free one at https://api.nasa.gov (instant). */
-    public static final String NASA_API_KEY = "DEMO_KEY";
+    /** NASA API key */
+    public static final String NASA_API_KEY = "spiLUFcT3cxfsgiHWZYKEVS9rZRS8v3SK6YBDG1y";
 
-    /** OpenRouter API key — get free credits at https://openrouter.ai */
-    public static final String OPENROUTER_API_KEY = "PUT_YOUR_OPENROUTER_KEY_HERE";
+    /** OpenRouter API key */
+    public static final String OPENROUTER_API_KEY = "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";
 
-    /** OpenRouter model to use for AI facts. */
+    /** OpenRouter model */
     public static final String OPENROUTER_MODEL = "meta-llama/llama-3.2-3b-instruct:free";
 
-    // =================================================================
-    // INTERNALS — do not edit below
-    // =================================================================
+   
 
     static {
         try {

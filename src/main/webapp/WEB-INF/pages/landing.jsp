@@ -22,10 +22,10 @@
 <main class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(109,221,255,0.08)_0%,_transparent_70%)] -z-10"></div>
     <div class="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-        <div class="relative w-full max-w-4xl aspect-[16/9] mb-[-220px] pointer-events-none">
-            <img alt="Planet Earth from space" class="w-full h-full object-contain mix-blend-screen opacity-80"
-                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOmSp9yw5PL7EO5LES9vUDzeikyvXpea4oe0jK6hVbuqZj3VzCNHX5eBw_W4hddn0lrgCDnPLde5eiMqKSrf1NEPiHgz8U6qo5ZH7afTRUUIZMdIzUCOlqa7Q2TKB3sIj36At283oqcDDD9HrFwF4xX68jgFQr2bUH9uPhS-kCMzfnnGwW2MXVAAkQg16g4QEOFGY4k2VC43SrddGWB-xbNU1GkbC5ckaEGXdimjCxYQxXqjsRa5_2C3sVdFknbKzM5QxlqL0MPmo"/>
-        </div>
+        <div class="absolute w-full max-w-3xl aspect-square top-1/2 left-1/2 -translate-x-1/2 -translate-y-[55%] pointer-events-none -z-10">
+		    <img alt="Planet Earth from space" class="w-full h-full object-contain opacity-50"
+		         src="${pageContext.request.contextPath}/images/earth_PNG39.png"/>
+		</div>
         <h1 class="font-headline font-light italic text-[80px] md:text-[180px] leading-[0.85] tracking-tighter text-shimmer mb-8 select-none">
             Explore <br/> the cosmos.
         </h1>

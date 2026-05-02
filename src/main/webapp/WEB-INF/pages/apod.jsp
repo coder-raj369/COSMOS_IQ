@@ -14,7 +14,14 @@
 <c:if test="${not empty apod}">
 <!-- Hero Image -->
 <section class="relative min-h-[80vh] flex items-end overflow-hidden">
-    <img class="absolute inset-0 w-full h-full object-cover" src="${apod.url}" alt="${apod.title}"/>
+    <c:choose>
+	    <c:when test="${apod.media_type == 'video'}">
+	        <iframe class="absolute inset-0 w-full h-full" src="${apod.url}" frameborder="0" allowfullscreen></iframe>
+	    </c:when>
+	    <c:otherwise>
+	        <img class="absolute inset-0 w-full h-full object-cover" src="${apod.url}" alt="${apod.title}"/>
+	    </c:otherwise>
+	</c:choose>
     <div class="absolute inset-0 bg-gradient-to-t from-[#05060d] via-transparent to-black/40"></div>
     <div class="container mx-auto px-6 pb-24 relative z-10 grid grid-cols-12 items-end">
         <div class="col-span-12 lg:col-span-8">

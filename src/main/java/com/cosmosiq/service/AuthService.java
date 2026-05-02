@@ -30,7 +30,7 @@ public class AuthService {
             userDAO.resetFailedAttempts(email);
             return user;
         } else {
-            // Failure — increment counter
+            // Failure  increment counter
             userDAO.incrementFailedAttempts(email);
             user = userDAO.findByEmail(email); // refresh
             if (user != null && user.getFailedAttempts() >= MAX_FAILED_ATTEMPTS) {
@@ -64,7 +64,7 @@ public class AuthService {
     }
 
     /**
-     * Check if account is locked (for showing appropriate error message).
+     * Check if account is locked
      */
     public boolean isAccountLocked(String email) {
         User user = userDAO.findByEmail(email);

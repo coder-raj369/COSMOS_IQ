@@ -31,7 +31,7 @@ public class DBConfig {
     public static final String OPENROUTER_API_KEY = "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";
 
     /** OpenRouter model */
-    public static final String OPENROUTER_MODEL = "meta-llama/llama-3.1-8b-instruct:free";
+    public static final String OPENROUTER_MODEL = "google/gemma-3-12b-it:free";
 
    
 

@@ -34,7 +34,7 @@ public class AiFactService {
 
     private String callOpenRouter(String topic) {
         String apiKey = DBConfig.OPENROUTER_API_KEY;
-        if (apiKey == null || apiKey.isEmpty() || apiKey.startsWith("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")) {
+        if (apiKey == null || apiKey.isEmpty() || apiKey.startsWith("PUT_YOUR")) {
             return "AI insights are coming soon! Configure your OpenRouter API key in DBConfig.java to enable this feature.";
         }
 
@@ -68,8 +68,10 @@ public class AiFactService {
             }
             return "The cosmos holds mysteries we are still unraveling.";
         } catch (Exception e) {
+            System.out.println("=== AI FACT ERROR ===");
+            System.out.println("Message: " + e.getMessage());
             e.printStackTrace();
-            return "Unable to connect to AI service. Try again later.";
+            return "AI Error: " + e.getMessage();
         }
     }
 }

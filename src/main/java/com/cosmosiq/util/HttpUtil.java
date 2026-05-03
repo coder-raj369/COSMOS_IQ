@@ -7,10 +7,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-/**
- * Tiny HTTP client wrapper using java.net.http (built into Java 11+).
- * Used by NasaService and AiFactService to call external APIs.
- */
 public class HttpUtil {
 
     private static final HttpClient CLIENT = HttpClient.newBuilder()
@@ -18,7 +14,6 @@ public class HttpUtil {
             .followRedirects(HttpClient.Redirect.NORMAL)
             .build();
 
-    /** Simple GET — returns response body as string. */
     public static String get(String url) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -34,7 +29,6 @@ public class HttpUtil {
         return response.body();
     }
 
-    /** POST with JSON body and bearer token (used for OpenRouter). */
     public static String postJson(String url, String jsonBody, String bearerToken)
             throws IOException, InterruptedException {
         HttpRequest.Builder builder = HttpRequest.newBuilder()
@@ -43,6 +37,7 @@ public class HttpUtil {
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .header("User-Agent", "CosmosIQ/1.0")
+                .header("HTTP-Referer", "http://localhost:8080")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody));
         if (bearerToken != null && !bearerToken.isEmpty()) {
             builder.header("Authorization", "Bearer " + bearerToken);

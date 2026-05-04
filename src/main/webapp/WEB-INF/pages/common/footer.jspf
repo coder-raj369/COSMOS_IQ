@@ -12,6 +12,7 @@
                 <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/apod">APOD Archive</a></li>
                 <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/mars">Mars Rover</a></li>
                 <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/asteroids">Asteroid Tracker</a></li>
+                <li><a class="hover:text-primary transition-colors" href="${pageContext.request.contextPath}/iss">ISS Live Tracker</a></li>
             </ul>
         </div>
         <div>

@@ -8,6 +8,7 @@
             <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'home' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/home">Missions</a>
             <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'apod' || currentPage == 'mars' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/apod">Telemetry</a>
             <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'favorites' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/favorites">Archives</a>
+            <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'iss' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/iss">Station</a>
             <a class="font-serif text-lg tracking-tight uppercase ${currentPage == 'about' ? 'text-cyan-400 border-b border-cyan-400 pb-1' : 'text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(109,221,255,0.8)]'} transition-all" href="${pageContext.request.contextPath}/about">About</a>
         </div>
     </div>

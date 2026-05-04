@@ -28,10 +28,10 @@ public class DBConfig {
     public static final String NASA_API_KEY = "spiLUFcT3cxfsgiHWZYKEVS9rZRS8v3SK6YBDG1y";
 
     /** OpenRouter API key */
-    public static final String OPENROUTER_API_KEY = "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";
+    public static final String OPENROUTER_API_KEY = "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";
 
     /** OpenRouter model */
-    public static final String OPENROUTER_MODEL = "google/gemma-3-12b-it:free";
+    public static final String OPENROUTER_MODEL = "openai/gpt-oss-20b:free";
 
    
 

@@ -74,6 +74,48 @@ body { background-color: #0c0e16; color: #f1effb; font-family: 'Inter', sans-ser
 .glass-panel { background: rgba(23,25,35,0.6); backdrop-filter: blur(40px); border: 1px solid rgba(255,255,255,0.08); }
 .text-shimmer { background: linear-gradient(to right, #f1effb 20%, #5a5c6f 50%, #f1effb 80%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; }
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24; }
+
+/* ═══════════════════════════════════════════════════════════
+   APPLE-STYLE SCROLL ANIMATION SYSTEM
+═══════════════════════════════════════════════════════════ */
+html { scroll-behavior: smooth; }
+*, *::before, *::after { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Reveal variants — start state */
+.a-reveal       { opacity:0; transform:translateY(48px);   transition:opacity .9s ease, transform .9s cubic-bezier(.25,.46,.45,.94); }
+.a-reveal-up    { opacity:0; transform:translateY(72px);   transition:opacity 1s ease,  transform 1s cubic-bezier(.25,.46,.45,.94); }
+.a-reveal-scale { opacity:0; transform:scale(.88);         transition:opacity 1s ease,  transform 1s cubic-bezier(.25,.46,.45,.94); }
+.a-reveal-left  { opacity:0; transform:translateX(-56px);  transition:opacity .9s ease, transform .9s cubic-bezier(.25,.46,.45,.94); }
+.a-reveal-right { opacity:0; transform:translateX(56px);   transition:opacity .9s ease, transform .9s cubic-bezier(.25,.46,.45,.94); }
+.a-reveal-blur  { opacity:0; filter:blur(18px); transform:translateY(20px); transition:opacity 1.2s ease, filter 1.2s ease, transform 1.2s cubic-bezier(.25,.46,.45,.94); }
+
+/* "Arrived" state — JS adds this */
+.a-in { opacity:1 !important; transform:none !important; filter:none !important; }
+
+/* Stagger delays */
+.a-d1{transition-delay:.08s} .a-d2{transition-delay:.16s} .a-d3{transition-delay:.24s}
+.a-d4{transition-delay:.32s} .a-d5{transition-delay:.40s} .a-d6{transition-delay:.50s}
+.a-d7{transition-delay:.60s} .a-d8{transition-delay:.72s} .a-d9{transition-delay:.85s}
+
+/* Pin-scroll progress dots */
+.pin-dot { width:6px; height:6px; border-radius:50%; background:rgba(109,221,255,.2); transition:all .35s ease; cursor:pointer; }
+.pin-dot.active { background:#6dddff; transform:scale(1.6); box-shadow:0 0 10px rgba(109,221,255,.7); }
+
+/* Marquee */
+@keyframes cos-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-track { animation:cos-marquee 32s linear infinite; white-space:nowrap; will-change:transform; }
+.marquee-track:hover { animation-play-state:paused; }
+
+/* Horizontal line grow */
+.a-line { transform:scaleX(0); transform-origin:left; transition:transform 1.5s cubic-bezier(.25,.46,.45,.94); }
+.a-in.a-line { transform:scaleX(1); }
+
+/* Section divider gradient line */
+.cosmos-divider { height:1px; background:linear-gradient(to right, transparent, rgba(109,221,255,.3), transparent); }
+
+/* Bento card hover lift */
+.bento-card { transition: transform .5s cubic-bezier(.25,.46,.45,.94), box-shadow .5s ease, border-color .5s ease; }
+.bento-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 24px 60px rgba(0,0,0,.5); border-color: rgba(109,221,255,.2) !important; }
 </style>
 <script>var contextPath = '${pageContext.request.contextPath}';</script>
 <script src="${pageContext.request.contextPath}/js/cosmosiq.js" defer></script>

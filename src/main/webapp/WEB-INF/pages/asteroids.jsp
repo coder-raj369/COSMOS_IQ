@@ -21,26 +21,26 @@
         <p class="font-label text-primary tracking-[0.4em] text-xs mb-6 flex items-center gap-3">
             <span class="w-12 h-[1px] bg-primary"></span> PLANETARY DEFENSE // LIVE FEED
         </p>
-        <h1 class="font-headline text-7xl md:text-[100px] leading-[0.9] font-light italic text-shimmer mb-8 tracking-tighter">Threats in the<br/>neighborhood.</h1>
+        <h1 class="a-split font-headline text-7xl md:text-[100px] leading-[0.9] font-light italic text-shimmer mb-8 tracking-tighter">Threats in the<br/>neighborhood.</h1>
     </div>
 </section>
 
 <!-- Stat Bar -->
 <section class="px-8 -mt-12 relative z-20">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-7xl mx-auto">
-        <div class="glass-panel p-8">
+        <div class="glass-panel p-8 a-reveal">
             <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">Total Tracked</p>
-            <p class="text-4xl font-headline">${totalCount}</p>
+            <p class="text-4xl font-headline a-counter">${totalCount}</p>
         </div>
-        <div class="glass-panel p-8 border-l-4 border-secondary">
+        <div class="glass-panel p-8 border-l-4 border-secondary a-reveal a-d2">
             <p class="font-label text-[10px] text-secondary uppercase tracking-widest mb-4">Potentially Hazardous</p>
-            <p class="text-4xl font-headline text-secondary">${hazardousCount}</p>
+            <p class="text-4xl font-headline text-secondary a-counter">${hazardousCount}</p>
         </div>
-        <div class="glass-panel p-8">
+        <div class="glass-panel p-8 a-reveal a-d4">
             <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">Data Source</p>
             <p class="text-lg font-label">NASA NeoWs API</p>
         </div>
-        <div class="glass-panel p-8">
+        <div class="glass-panel p-8 a-reveal a-d6">
             <p class="font-label text-[10px] text-primary uppercase tracking-widest mb-4">Status</p>
             <p class="text-lg font-label text-primary flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> Live Feed</p>
         </div>
@@ -49,7 +49,7 @@
 
 <!-- Asteroid List -->
 <section class="py-24 px-8 max-w-7xl mx-auto">
-    <div class="space-y-4">
+    <div class="space-y-4" data-stagger="0.05">
         <c:forEach items="${asteroids}" var="a">
         <div class="glass-panel group flex flex-col md:flex-row items-center gap-8 p-8 hover:bg-surface-bright transition-all duration-500">
             <!-- Size Viz -->

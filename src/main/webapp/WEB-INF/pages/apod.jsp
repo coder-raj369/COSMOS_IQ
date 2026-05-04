@@ -25,11 +25,11 @@
     <div class="absolute inset-0 bg-gradient-to-t from-[#05060d] via-transparent to-black/40"></div>
     <div class="container mx-auto px-6 pb-24 relative z-10 grid grid-cols-12 items-end">
         <div class="col-span-12 lg:col-span-8">
-            <p class="font-label text-primary tracking-[0.4em] uppercase text-[10px] mb-4">Stellar Archive // ${apod.date}</p>
-            <h1 class="font-headline font-light italic text-7xl md:text-[100px] text-shimmer leading-[0.9]">${apod.title}</h1>
+            <p class="a-reveal font-label text-primary tracking-[0.4em] uppercase text-[10px] mb-4">Stellar Archive // ${apod.date}</p>
+            <h1 class="a-split font-headline font-light italic text-7xl md:text-[100px] text-shimmer leading-[0.9]">${apod.title}</h1>
         </div>
         <div class="col-span-12 lg:col-span-4 mt-12 lg:mt-0 flex justify-end">
-            <div class="glass-panel p-8 rounded-xl max-w-sm w-full">
+            <div class="a-reveal a-d3 glass-panel p-8 rounded-xl max-w-sm w-full">
                 <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">${apod.explanation}</p>
                 <c:if test="${not empty apod.copyright}">
                     <p class="font-label text-[10px] text-on-surface-variant mb-4">Credit: ${apod.copyright}</p>

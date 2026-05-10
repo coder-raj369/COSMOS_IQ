@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <c:set var="currentPage" value="apod" scope="request"/>
 <!DOCTYPE html>
 <html class="dark" lang="en">
@@ -15,13 +16,14 @@
 <!-- Hero Image -->
 <section class="relative min-h-[80vh] flex items-end overflow-hidden">
     <c:choose>
-	    <c:when test="${apod.media_type == 'video'}">
-	        <iframe class="absolute inset-0 w-full h-full" src="${apod.url}" frameborder="0" allowfullscreen></iframe>
-	    </c:when>
-	    <c:otherwise>
-	        <img class="absolute inset-0 w-full h-full object-cover" src="${apod.url}" alt="${apod.title}"/>
-	    </c:otherwise>
-	</c:choose>
+        <c:when test="${apod.media_type == 'video' && not empty apod.video_url && fn:contains(apod.video_url, 'youtube')}">
+            <iframe class="absolute inset-0 w-full h-full" src="${apod.video_url}" frameborder="0" allowfullscreen></iframe>
+        </c:when>
+        <c:otherwise>
+            <%-- apod.url is always an image (thumbnail for video days, or the actual image) --%>
+            <img class="absolute inset-0 w-full h-full object-cover" src="${apod.url}" alt="${apod.title}"/>
+        </c:otherwise>
+    </c:choose>
     <div class="absolute inset-0 bg-gradient-to-t from-[#05060d] via-transparent to-black/40"></div>
     <div class="container mx-auto px-6 pb-24 relative z-10 grid grid-cols-12 items-end">
         <div class="col-span-12 lg:col-span-8">

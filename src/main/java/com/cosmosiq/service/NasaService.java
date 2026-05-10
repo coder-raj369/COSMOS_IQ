@@ -14,26 +14,67 @@ public class NasaService {
 
     private static final String BASE = "https://api.nasa.gov";
 
-    //  APOD (Astronomy Picture of the Day) 
+    // ── Day-scoped APOD cache (avoids burning API quota on every page load) ──
+    private static volatile Map<String, String> apodCache     = null;
+    private static volatile String              apodCacheDate = "";
 
-    /** Get APOD for a specific date (format: "yyyy-MM-dd"). */
+    //  APOD (Astronomy Picture of the Day)
+
+    /** Get APOD for a specific date (format: "yyyy-MM-dd"). Returns fallback on any error. */
     public Map<String, String> getApod(String date) {
+        // Use cache only for "today" requests (no specific date)
+        String today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        if (date == null || date.isEmpty()) {
+            if (apodCache != null && today.equals(apodCacheDate)) {
+                return apodCache;
+            }
+        }
         try {
             String url = BASE + "/planetary/apod?api_key=" + DBConfig.NASA_API_KEY;
             if (date != null && !date.isEmpty()) url += "&date=" + date;
             String json = HttpUtil.get(url);
             JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
+
+            // NASA returns {"error":{...}} when rate-limited or key invalid
+            if (obj.has("error") || obj.has("errors")) {
+                System.err.println("[NasaService] APOD API error: " + json);
+                return fallbackApod();
+            }
+
             Map<String, String> result = new HashMap<>();
             result.put("title",       getStr(obj, "title"));
             result.put("date",        getStr(obj, "date"));
             result.put("explanation", getStr(obj, "explanation"));
-            result.put("url",         getStr(obj, "url"));
-            result.put("hdurl",       getStr(obj, "hdurl"));
             result.put("media_type",  getStr(obj, "media_type"));
             result.put("copyright",   getStr(obj, "copyright"));
+
+            // For videos, prefer thumbnail_url so the hero still shows an image
+            String mediaType = result.get("media_type");
+            String imageUrl  = getStr(obj, "url");
+            if ("video".equals(mediaType)) {
+                String thumb = getStr(obj, "thumbnail_url");
+                result.put("url",      !thumb.isEmpty() ? thumb : imageUrl);
+                result.put("video_url", imageUrl);   // kept for the iframe
+            } else {
+                result.put("url",       imageUrl);
+                result.put("video_url", "");
+            }
+            result.put("hdurl", getStr(obj, "hdurl"));
+
+            // Validate we actually got usable data
+            if (result.get("url").isEmpty()) {
+                System.err.println("[NasaService] APOD returned empty url, using fallback");
+                return fallbackApod();
+            }
+
+            // Cache today's result
+            if (date == null || date.isEmpty()) {
+                apodCache     = result;
+                apodCacheDate = today;
+            }
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("[NasaService] APOD fetch failed: " + e.getMessage());
             return fallbackApod();
         }
     }

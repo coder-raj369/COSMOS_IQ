@@ -105,7 +105,8 @@ input:-webkit-autofill { -webkit-text-fill-color: #f1effb; -webkit-box-shadow: 0
         </form>
 
         <div class="mt-10 pt-8 border-t border-white/5 text-center" style="animation:slide-up 0.7s ease-out forwards;animation-delay:0.4s;opacity:0">
-            <p class="text-xs text-on-surface-variant">Don't have an account? <a class="text-primary hover:text-white transition-colors underline underline-offset-4" href="${pageContext.request.contextPath}/register">Create one</a></p>
+            <p class="text-xs text-on-surface-variant mb-2">Forgot your password? <a class="text-primary hover:text-white transition-colors underline underline-offset-4" href="${pageContext.request.contextPath}/forgot-password">Reset it</a></p>
+			<p class="text-xs text-on-surface-variant">Don't have an account? <a class="text-primary hover:text-white transition-colors underline underline-offset-4" href="${pageContext.request.contextPath}/register">Create one</a></p>
         </div>
     </div>
 </main>

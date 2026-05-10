@@ -40,6 +40,7 @@ public class AuthFilter implements Filter {
         return path.equals("/landing")
                 || path.equals("/login")
                 || path.equals("/register")
+                || path.equals("/forgot-password")
                 || path.equals("/about")
                 || path.equals("/contact")
                 || path.startsWith("/css/")

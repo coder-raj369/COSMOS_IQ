@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <c:set var="currentPage" value="home" scope="request"/>
 <!DOCTYPE html>
 <html class="dark" lang="en">
@@ -55,10 +56,10 @@
      HERO — Full-screen personalized greeting
 ══════════════════════════════════════════════════════════ -->
 <section class="relative h-screen flex flex-col justify-end overflow-hidden" data-hero-section id="home-hero">
-  <!-- APOD or fallback background -->
+  <!-- APOD or fallback background — apod.url is always an image (video thumbnail or still) -->
   <div class="absolute inset-0 z-0">
     <c:choose>
-      <c:when test="${not empty apod && not empty apod.url && apod.media_type != 'video'}">
+      <c:when test="${not empty apod && not empty apod.url}">
         <img class="w-full h-full object-cover scale-105" src="${apod.url}" alt="${apod.title}" data-parallax="0.15"/>
       </c:when>
       <c:otherwise>
@@ -108,7 +109,7 @@
 <!-- ══════════════════════════════════════════════════════════
      TODAY IN THE COSMOS — APOD showcase
 ══════════════════════════════════════════════════════════ -->
-<c:if test="${not empty apod}">
+<c:if test="${not empty apod && not empty apod.url}">
 <section class="max-w-7xl mx-auto px-8 py-24">
   <div class="mb-10">
     <p class="a-reveal font-label text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Today in the cosmos</p>
@@ -119,8 +120,9 @@
 
   <div class="apod-card relative rounded-xl overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,.7)]" style="aspect-ratio:21/9">
     <c:choose>
-      <c:when test="${apod.media_type == 'video'}">
-        <iframe class="w-full h-full" src="${apod.url}" frameborder="0" allowfullscreen></iframe>
+      <%-- If it's a video with a proper embed URL (YouTube), show iframe; otherwise always show image --%>
+      <c:when test="${apod.media_type == 'video' && not empty apod.video_url && fn:contains(apod.video_url, 'youtube')}">
+        <iframe class="w-full h-full" src="${apod.video_url}" frameborder="0" allowfullscreen></iframe>
       </c:when>
       <c:otherwise>
         <img class="apod-card-img w-full h-full object-cover" src="${apod.url}" alt="${apod.title}"/>

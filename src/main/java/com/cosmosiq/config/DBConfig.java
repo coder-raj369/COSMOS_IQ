@@ -32,7 +32,10 @@ public class DBConfig {
 
     /** OpenRouter model */
     public static final String OPENROUTER_MODEL = "openai/gpt-oss-20b:free";
-
+    
+    // Email config
+    public static final String SMTP_EMAIL    = "rajpandit69365@gmail.com";
+    public static final String SMTP_PASSWORD = "fmfyglxqvhkuvjut"; 
    
 
     static {

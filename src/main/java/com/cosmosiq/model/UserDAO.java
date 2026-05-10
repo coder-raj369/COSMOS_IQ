@@ -171,6 +171,38 @@ public class UserDAO {
     public boolean usernameExists(String username) {
         return findByUsername(username) != null;
     }
+    // --- Save reset token ---
+    public boolean saveResetToken(String email, String token, Timestamp expiry) {
+        String sql = "UPDATE users SET reset_token=?, reset_expiry=? WHERE email=?";
+        try (Connection c = DBConfig.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, token);
+            ps.setTimestamp(2, expiry);
+            ps.setString(3, email);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) { e.printStackTrace(); }
+        return false;
+    }
+
+    // --- Find by reset token ---
+    public User findByResetToken(String token) {
+        String sql = "SELECT * FROM users WHERE reset_token=? AND reset_expiry > NOW()";
+        try (Connection c = DBConfig.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, token);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return map(rs);
+        } catch (SQLException e) { e.printStackTrace(); }
+        return null;
+    }
+
+    // --- Clear reset token after use ---
+    public boolean clearResetToken(int userId) {
+        String sql = "UPDATE users SET reset_token=NULL, reset_expiry=NULL WHERE id=?";
+        try (Connection c = DBConfig.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) { e.printStackTrace(); }
+        return false;
+    }
 
     // --- ResultSet → User ---
     private User map(ResultSet rs) throws SQLException {

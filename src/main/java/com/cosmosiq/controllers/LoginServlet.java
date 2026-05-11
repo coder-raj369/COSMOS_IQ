@@ -17,7 +17,12 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null && session.getAttribute("user") != null) {
-            resp.sendRedirect(req.getContextPath() + "/home");
+            User user = (User) session.getAttribute("user");
+            if (user.isAdmin()) {
+                resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/home");
+            }
             return;
         }
         req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
@@ -46,7 +51,11 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession(true);
             session.setAttribute("user", user);
             session.setMaxInactiveInterval(30 * 60); // 30 minutes
-            resp.sendRedirect(req.getContextPath() + "/home");
+            if (user.isAdmin()) {
+                resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/home");
+            }
         } else {
             req.setAttribute("error", "Invalid credentials. Your account may be locked after 5 failed attempts.");
             req.setAttribute("email", email);

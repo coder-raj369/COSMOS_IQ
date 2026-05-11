@@ -38,15 +38,21 @@
                             <td class="px-8 py-5"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full ${u.locked?'bg-error':'bg-primary'}"></span><span class="font-label text-[10px] uppercase">${u.locked?'Locked':'Active'}</span></span></td>
                             <td class="px-8 py-5 font-label text-[10px] text-on-surface/60">${u.createdAt}</td>
                             <td class="px-8 py-5 text-right">
-                                <form method="POST" action="${pageContext.request.contextPath}/admin/users" class="inline-flex gap-3">
-                                    <input type="hidden" name="userId" value="${u.id}"/>
-                                    <c:if test="${u.locked}"><button name="action" value="unlock" class="text-primary text-[10px] font-label uppercase hover:underline">Unlock</button></c:if>
-                                    <c:if test="${!u.locked}"><button name="action" value="lock" class="text-secondary text-[10px] font-label uppercase hover:underline">Lock</button></c:if>
-                                    <c:if test="${!u.admin}"><button name="action" value="makeAdmin" class="text-primary text-[10px] font-label uppercase hover:underline">Promote</button></c:if>
-                                    <c:if test="${u.admin}"><button name="action" value="makeMember" class="text-on-surface-variant text-[10px] font-label uppercase hover:underline">Demote</button></c:if>
-                                    <button name="action" value="delete" class="text-error text-[10px] font-label uppercase hover:underline" onclick="return confirm('Delete this user permanently?')">Delete</button>
-                                </form>
-                            </td>
+							    <form method="POST" action="${pageContext.request.contextPath}/admin/users" class="inline-flex gap-3">
+							        <input type="hidden" name="userId" value="${u.id}"/>
+							        <c:choose>
+							            <c:when test="${u.id == pageContext.session.getAttribute('user').id}">
+							                <span class="text-on-surface/20 text-[10px] font-label uppercase">You</span>
+							            </c:when>
+							            <c:otherwise>
+							                <c:if test="${u.locked}"><button name="action" value="unlock" class="text-primary text-[10px] font-label uppercase hover:underline">Unlock</button></c:if>
+							                <c:if test="${!u.locked and !u.admin}"><button name="action" value="lock" class="text-secondary text-[10px] font-label uppercase hover:underline">Lock</button></c:if>
+							                <c:if test="${u.admin}"><button name="action" value="makeMember" class="text-on-surface-variant text-[10px] font-label uppercase hover:underline">Demote</button></c:if>
+							                <c:if test="${!u.admin}"><button name="action" value="delete" class="text-error text-[10px] font-label uppercase hover:underline" onclick="return confirm('Delete this user permanently?')">Delete</button></c:if>
+							            </c:otherwise>
+							        </c:choose>
+							    </form>
+							</td>
                         </tr>
                         </c:forEach>
                     </tbody>

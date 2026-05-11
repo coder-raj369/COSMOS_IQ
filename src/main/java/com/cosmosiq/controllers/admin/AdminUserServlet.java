@@ -21,13 +21,22 @@ public class AdminUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getParameter("action");
         int userId = Integer.parseInt(req.getParameter("userId"));
-
+        
+        // Get current logged-in admin ID
+        HttpSession session = req.getSession(false);
+        com.cosmosiq.model.User currentAdmin = (com.cosmosiq.model.User) session.getAttribute("user");
+        
         switch (action) {
             case "lock":   userDAO.toggleLock(userId, true); break;
             case "unlock": userDAO.toggleLock(userId, false); break;
-            case "delete": userDAO.delete(userId); break;
-            case "makeAdmin":  userDAO.updateRole(userId, "admin"); break;
+            case "delete":
+                // Prevent admin deleting themselves
+                if (userId != currentAdmin.getId()) {
+                    userDAO.delete(userId);
+                }
+                break;
             case "makeMember": userDAO.updateRole(userId, "member"); break;
+            // "makeAdmin" case removed — admins cannot promote users to admin
         }
         resp.sendRedirect(req.getContextPath() + "/admin/users");
     }

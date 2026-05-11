@@ -36,11 +36,6 @@
                 <c:if test="${not empty apod.copyright}">
                     <p class="font-label text-[10px] text-on-surface-variant mb-4">Credit: ${apod.copyright}</p>
                 </c:if>
-                <button onclick="generateAiFact('apod:${apod.date}', '${apod.title}', 'apod-fact')" class="w-full py-4 glass-panel border-primary/30 text-primary font-label text-[11px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-primary hover:text-on-primary transition-all duration-500">
-                    <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
-                    Generate AI Insight
-                </button>
-                <div id="apod-fact" class="mt-4 text-xs text-primary/80 leading-relaxed hidden"></div>
                 <!-- Save to favorites -->
                 <form method="POST" action="${pageContext.request.contextPath}/favorites" class="mt-4">
                     <input type="hidden" name="action" value="save"/>

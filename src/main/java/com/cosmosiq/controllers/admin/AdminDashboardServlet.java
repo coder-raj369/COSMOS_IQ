@@ -12,12 +12,11 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
         FavoriteDAO favDAO = new FavoriteDAO();
-        AiFactDAO aiDAO = new AiFactDAO();
+//        AiFactDAO aiDAO = new AiFactDAO();
         ContactMessageDAO msgDAO = new ContactMessageDAO();
 
         req.setAttribute("totalUsers", userDAO.countAll());
         req.setAttribute("totalFavorites", favDAO.countAll());
-        req.setAttribute("totalAiFacts", aiDAO.countAll());
         req.setAttribute("unreadMessages", msgDAO.countUnread());
         req.setAttribute("allUsers", userDAO.findAll());
 

@@ -83,10 +83,6 @@
                             <p class="font-body text-[9px] text-on-surface/50">${photo.earth_date} · Sol ${photo.sol}</p>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="generateAiFact('mars:${photo.id}','Mars rover photo from ${photo.rover}, camera ${photo.camera}, date ${photo.earth_date}','mars-fact-${photo.id}')"
-                                    class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors">
-                                <span class="material-symbols-outlined text-sm">auto_awesome</span>
-                            </button>
                             <form method="POST" action="${pageContext.request.contextPath}/favorites">
                                 <input type="hidden" name="action" value="save"/>
                                 <input type="hidden" name="type" value="mars"/>
@@ -100,9 +96,7 @@
                             </form>
                         </div>
                     </div>
-                    <div id="mars-fact-${photo.id}" class="mt-2 text-[10px] text-primary/80 hidden leading-relaxed"></div>
                 </div>
-            </div>
             </div>
             </c:forEach>
         </div>

@@ -27,12 +27,6 @@ public class DBConfig {
     /** NASA API key */
     public static final String NASA_API_KEY = "spiLUFcT3cxfsgiHWZYKEVS9rZRS8v3SK6YBDG1y";
 
-    /** OpenRouter API key */
-    public static final String OPENROUTER_API_KEY = "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";
-
-    /** OpenRouter model */
-    public static final String OPENROUTER_MODEL = "openai/gpt-oss-20b:free";
-    
     // Email config
     public static final String SMTP_EMAIL    = "rajpandit69365@gmail.com";
     public static final String SMTP_PASSWORD = "fmfyglxqvhkuvjut"; 

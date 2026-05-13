@@ -22,12 +22,6 @@ public class HomeServlet extends HttpServlet {
             req.setAttribute("favoritesCount", 0);
         }
 
-//        try {
-//            req.setAttribute("aiFactsCount", new AiFactDAO().countAll());
-//        } catch (Exception e) {
-//            req.setAttribute("aiFactsCount", 0);
-//        }
-
         try {
             req.setAttribute("apod", new NasaService().getTodayApod());
         } catch (Exception e) {

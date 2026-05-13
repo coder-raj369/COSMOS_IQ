@@ -22,7 +22,7 @@ public class DBConfig {
     public static final String DB_PASSWORD = "";
 
   
-    // EXTERNAL API KEYS
+    
 
     /** NASA API key */
     public static final String NASA_API_KEY = "spiLUFcT3cxfsgiHWZYKEVS9rZRS8v3SK6YBDG1y";

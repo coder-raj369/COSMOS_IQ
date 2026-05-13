@@ -150,7 +150,65 @@
   </div>
 </section>
 </c:if>
+<!-- ══════════════════════════════════════════════════════════
+     FEATURED SPACE EVENTS — Admin curated
+══════════════════════════════════════════════════════════ -->
+<c:if test="${not empty featuredEvents}">
+<section class="max-w-7xl mx-auto px-8 pb-24">
+  <div class="mb-10">
+    <p class="a-reveal font-label text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Mission Control</p>
+    <h2 class="a-split font-headline font-light italic leading-none" style="font-size:clamp(44px,6vw,80px)">
+      Upcoming Events.
+    </h2>
+  </div>
 
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <c:forEach items="${featuredEvents}" var="event">
+      <div class="glass-panel rounded-xl border border-white/5 p-8 flex flex-col justify-between hover:border-primary/30 transition-all duration-500 group">
+
+        <!-- Top: type badge + title -->
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="font-label text-[9px] uppercase tracking-[0.35em] text-primary bg-primary/10 px-3 py-1 rounded-full">
+              ${event.type}
+            </span>
+            <span class="material-symbols-outlined text-on-surface/20 group-hover:text-primary transition-colors"
+                  style="font-variation-settings:'FILL' 0,'wght' 100">rocket_launch</span>
+          </div>
+
+          <h3 class="font-headline font-light italic text-2xl leading-tight mb-3 group-hover:text-primary transition-colors">
+            ${event.title}
+          </h3>
+
+          <p class="font-body text-sm text-on-surface-variant leading-relaxed line-clamp-3">
+            ${event.description}
+          </p>
+        </div>
+
+        <!-- Bottom: date -->
+        <div class="mt-6 pt-5 border-t border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-sm"
+                  style="font-variation-settings:'FILL' 1">calendar_month</span>
+            <span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">
+              ${event.eventDate}
+            </span>
+          </div>
+
+          <!-- Show image if available -->
+          <c:if test="${not empty event.imageUrl}">
+            <a href="${event.imageUrl}" target="_blank"
+               class="font-label text-[9px] uppercase tracking-[0.2em] text-primary/60 hover:text-primary transition-colors flex items-center gap-1">
+              View <span class="material-symbols-outlined text-xs">open_in_new</span>
+            </a>
+          </c:if>
+        </div>
+
+      </div>
+    </c:forEach>
+  </div>
+</section>
+</c:if>
 <!-- ══════════════════════════════════════════════════════════
      BENTO QUICK LINKS
 ══════════════════════════════════════════════════════════ -->

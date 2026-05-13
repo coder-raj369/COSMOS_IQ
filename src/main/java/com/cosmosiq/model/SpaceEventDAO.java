@@ -67,7 +67,7 @@ public class SpaceEventDAO {
 
     public List<SpaceEvent> findFeatured() {
         List<SpaceEvent> list = new ArrayList<>();
-        String sql = "SELECT * FROM space_events WHERE is_featured=TRUE ORDER BY event_date ASC";
+        String sql = "SELECT * FROM space_events WHERE is_featured=TRUE ORDER BY created_at DESC";
         try (Connection c = DBConfig.getConnection(); Statement s = c.createStatement(); ResultSet rs = s.executeQuery(sql)) {
             while (rs.next()) list.add(map(rs));
         } catch (SQLException e) { e.printStackTrace(); }

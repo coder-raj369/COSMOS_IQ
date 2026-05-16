@@ -185,7 +185,7 @@ public class UserDAO {
 
     // --- Find by reset token ---
     public User findByResetToken(String token) {
-        String sql = "SELECT * FROM users WHERE reset_token=? AND reset_expiry > NOW()";
+        String sql = "SELECT * FROM users WHERE reset_token=?";
         try (Connection c = DBConfig.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, token);
             ResultSet rs = ps.executeQuery();
@@ -217,6 +217,9 @@ public class UserDAO {
         u.setLocked(rs.getBoolean("is_locked"));
         u.setFailedAttempts(rs.getInt("failed_attempts"));
         u.setCreatedAt(rs.getTimestamp("created_at"));
+        u.setResetToken(rs.getString("reset_token"));
+        u.setResetExpiry(rs.getTimestamp("reset_expiry"));
+
         return u;
     }
 }

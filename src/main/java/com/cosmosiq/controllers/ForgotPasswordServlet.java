@@ -73,7 +73,7 @@ public class ForgotPasswordServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/pages/forgotpassword.jsp").forward(req, resp);
 
         } else if ("reset".equals(step)) {
-            String token = req.getParameter("token");
+        	String token = req.getParameter("token");
             String newPassword = req.getParameter("password");
             String confirmPassword = req.getParameter("confirmPassword");
 
@@ -93,8 +93,16 @@ public class ForgotPasswordServlet extends HttpServlet {
             }
 
             User user = userDAO.findByResetToken(token);
-            if (user == null) {
-                req.setAttribute("error", "Reset link is invalid or expired. Please request a new one.");
+
+            if (user == null || user.getResetExpiry() == null) {
+                req.setAttribute("error", "Reset link is invalid or expired.");
+                req.setAttribute("step", "request");
+                req.getRequestDispatcher("/WEB-INF/pages/forgotpassword.jsp").forward(req, resp);
+                return;
+            }
+
+            if (user.getResetExpiry().before(new Timestamp(System.currentTimeMillis()))) {
+                req.setAttribute("error", "Reset link is expired.");
                 req.setAttribute("step", "request");
                 req.getRequestDispatcher("/WEB-INF/pages/forgotpassword.jsp").forward(req, resp);
                 return;

@@ -130,12 +130,14 @@ public class NasaService {
         List<Map<String, String>> all = new ArrayList<>();
         String[] rovers = {"curiosity", "perseverance", "opportunity", "spirit"};
         for (String rover : rovers) {
-            List<Map<String, String>> roverPhotos = getMarsPhotos(rover, null, camera);
-            int limit = Math.min(roverPhotos.size(), 10);
-            for (int i = 0; i < limit; i++) {
-                Map<String, String> p = roverPhotos.get(i);
-                p.put("camera_short", p.get("camera"));
-                all.add(p);
+            try {
+                List<Map<String, String>> roverPhotos = getMarsPhotosBySol(rover, camera);
+                int limit = Math.min(roverPhotos.size(), 10);
+                for (int i = 0; i < limit; i++) {
+                    all.add(roverPhotos.get(i));
+                }
+            } catch (Exception e) {
+                System.err.println("[NasaService] Skipping rover " + rover + ": " + e.getMessage());
             }
         }
         return all;
@@ -215,29 +217,44 @@ public class NasaService {
     public List<Map<String, String>> getMarsPhotosBySol(String rover, String camera) {
         List<Map<String, String>> photos = new ArrayList<>();
         try {
-            String url = BASE + "/mars-photos/api/v1/rovers/" + rover + "/latest_photos?api_key=" 
-                       + DBConfig.NASA_API_KEY;
-            if (camera != null && !camera.isEmpty()) url += "&camera=" + camera;
+            String query = rover;
+            if (camera != null && !camera.isEmpty()) query += " " + camera;
+
+            String url = "https://images-api.nasa.gov/search?q="
+                    + java.net.URLEncoder.encode("mars rover " + query, "UTF-8")
+                    + "&media_type=image&page_size=40";
+
             String json = HttpUtil.get(url);
-            JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
-            JsonArray arr = obj.getAsJsonArray("latest_photos");
-            if (arr != null) {
-                int limit = Math.min(arr.size(), 40);
-                for (int i = 0; i < limit; i++) {
-                    JsonObject p = arr.get(i).getAsJsonObject();
+            JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+            JsonArray items = root.getAsJsonObject("collection").getAsJsonArray("items");
+
+            if (items != null) {
+                for (int i = 0; i < items.size(); i++) {
+                    JsonObject item  = items.get(i).getAsJsonObject();
+                    JsonArray  data  = item.getAsJsonArray("data");
+                    JsonArray  links = item.getAsJsonArray("links");
+                    if (data == null || data.size() == 0) continue;
+                    if (links == null || links.size() == 0) continue;
+
+                    JsonObject d = data.get(0).getAsJsonObject();
+                    String imgUrl = getStr(links.get(0).getAsJsonObject(), "href");
+                    if (imgUrl.isEmpty()) continue;
+
+                    String rawDate = getStr(d, "date_created");
+                    String date = rawDate.length() >= 10 ? rawDate.substring(0, 10) : rawDate;
+                    String title = getStr(d, "title");
+
                     Map<String, String> photo = new HashMap<>();
-                    photo.put("id",         String.valueOf(p.get("id").getAsInt()));
-                    photo.put("sol",        String.valueOf(p.get("sol").getAsInt()));
-                    photo.put("img_src",    getStr(p, "img_src"));
-                    photo.put("earth_date", getStr(p, "earth_date"));
-                    if (p.has("camera") && p.get("camera").isJsonObject()) {
-                        photo.put("camera",       getStr(p.getAsJsonObject("camera"), "full_name"));
-                        photo.put("camera_short", getStr(p.getAsJsonObject("camera"), "name"));
-                    }
-                    if (p.has("rover") && p.get("rover").isJsonObject()) {
-                        photo.put("rover", getStr(p.getAsJsonObject("rover"), "name"));
-                    }
+                    photo.put("id",           String.valueOf(i));
+                    photo.put("sol",          "—");
+                    photo.put("img_src",      imgUrl);
+                    photo.put("earth_date",   date);
+                    photo.put("camera",       title);
+                    photo.put("camera_short", camera != null ? camera : "");
+                    photo.put("rover",        rover.substring(0,1).toUpperCase() + rover.substring(1));
                     photos.add(photo);
+
+                    if (photos.size() >= 40) break;
                 }
             }
         } catch (Exception e) {

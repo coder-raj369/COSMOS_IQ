@@ -16,6 +16,8 @@ public class User {
     private boolean locked;
     private int failedAttempts;
     private Timestamp createdAt;
+    private String resetToken;
+    private Timestamp resetExpiry;
 
     public User() {}
 
@@ -49,6 +51,22 @@ public class User {
 
     public Timestamp getCreatedAt() { return createdAt; }
     public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
+    
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
+    public Timestamp getResetExpiry() {
+        return resetExpiry;
+    }
+
+    public void setResetExpiry(Timestamp resetExpiry) {
+        this.resetExpiry = resetExpiry;
+    }
 
     public boolean isAdmin() { return "admin".equalsIgnoreCase(role); }
 }
